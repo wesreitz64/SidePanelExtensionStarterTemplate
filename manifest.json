@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "Sliding Side Panel",
+    "name": "Side Panel Starter",
     "version": "1.0",
-    "description": "A Chrome extension with a sliding side panel.",
+    "description": "A starter template for Chrome extensions with a side panel.",
     "permissions": [
       "activeTab"
     ],
@@ -24,4 +24,3 @@
       }
     ]
   }
-  
