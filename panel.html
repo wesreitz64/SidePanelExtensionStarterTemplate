@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Side Panel</title>
+  <title>Sliding Side Panel</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
+      overflow: hidden;
+    }
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 300px;
+      height: 100%;
+      background-color: #fff;
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+      transition: right 0.3s ease;
       display: flex;
       flex-direction: column;
+    }
+    .drawer.open {
+      right: 0;
     }
     .header {
       background-color: #f4f4f4;
@@ -18,31 +32,43 @@
     }
     .content {
       padding: 15px;
+      flex-grow: 1;
     }
-    .close-btn {
+    .toggle-btn {
       position: fixed;
       top: 10px;
       right: 10px;
-      background-color: #ff5c5c;
+      background-color: #007bff;
       color: white;
       border: none;
-      padding: 5px 10px;
+      padding: 10px 15px;
       cursor: pointer;
       border-radius: 5px;
     }
   </style>
 </head>
 <body>
-  <button class="close-btn" id="closePanel">Close</button>
-  <div class="header">
-    <h1>Side Panel</h1>
-  </div>
-  <div class="content">
-    <p>Welcome to your side panel!</p>
+  <button class="toggle-btn" id="toggleDrawer">Open Panel</button>
+  <div class="drawer" id="sideDrawer">
+    <div class="header">
+      <h1>Side Panel</h1>
+    </div>
+    <div class="content">
+      <p>Welcome to your sliding side panel!</p>
+    </div>
   </div>
   <script>
-    document.getElementById('closePanel').addEventListener('click', () => {
-      chrome.sidePanel.close();
+    const drawer = document.getElementById('sideDrawer');
+    const toggleButton = document.getElementById('toggleDrawer');
+
+    toggleButton.addEventListener('click', () => {
+      if (drawer.classList.contains('open')) {
+        drawer.classList.remove('open');
+        toggleButton.textContent = 'Open Panel';
+      } else {
+        drawer.classList.add('open');
+        toggleButton.textContent = 'Close Panel';
+      }
     });
   </script>
 </body>
